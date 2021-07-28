@@ -1,3 +1,4 @@
+import "./assets/css/style.css";
 import * as Kitsu from "./api/kitsu";
 import {
   AnimeList,
