@@ -61,7 +61,7 @@ const bubblyButtons = document.getElementById(
 
 bubblyButtons.addEventListener(
   "click",
-  function (ev) {
+  (ev) => {
     const target = ev.target as HTMLButtonElement;
 
     ev.preventDefault;
