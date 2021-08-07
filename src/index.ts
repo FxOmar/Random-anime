@@ -1,34 +1,13 @@
 import "./assets/css/style.css";
 import * as Kitsu from "./api/kitsu";
-import {
-  AnimeList,
-  Datum,
-  AnimeListLinks,
-} from "./Interfaces/animeList.interface";
-
-interface StateInterface {
-  collection: Datum[];
-  links: AnimeListLinks;
-  nextPage: string;
-}
-
-/**
- * Global state
- */
-let state: StateInterface = {
-  collection: [],
-  links: {
-    first: "",
-    next: "",
-    last: "",
-  },
-  nextPage: "0",
-};
+import { randomItemFromArray } from "./utils";
+import { AnimeList, Datum } from "./Interfaces/animeList.interface";
+import { state } from "./state";
 
 /**
  * Fetch anime collection
  */
-function fetchAnimeCollection() {
+function fetchAnimeCollection(): void {
   if (state.nextPage !== null) {
     Kitsu.listAll(state.nextPage).then((response: AnimeList) => {
       state.collection.push(...response.data);
@@ -43,12 +22,9 @@ function fetchAnimeCollection() {
 }
 
 /**
- * Get random element from an array.
- * @param arr Array
+ * Call fetchAnimeCollection on the load time.
  */
-function randomItemFromArray<T>(arr: T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
+window.onload = () => fetchAnimeCollection();
 
 function rollRandomAnime(arr: Datum[]) {
   const randomAnime = randomItemFromArray(arr);
@@ -61,7 +37,8 @@ const bubblyButtons = document.getElementById(
 
 bubblyButtons.addEventListener(
   "click",
-  (ev) => {
+  async (ev) => {
+    fetchAnimeCollection();
     const target = ev.target as HTMLButtonElement;
 
     ev.preventDefault;
@@ -75,8 +52,7 @@ bubblyButtons.addEventListener(
       target.classList.remove("animate");
     }, 500);
 
-    rollRandomAnime(state.collection);
-    fetchAnimeCollection();
+    await rollRandomAnime(state.collection);
   },
   false
 );
