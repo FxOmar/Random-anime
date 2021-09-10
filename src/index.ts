@@ -2,7 +2,7 @@ import "./assets/css/style.css";
 import * as Kitsu from "./api/kitsu";
 import { randomItemFromArray } from "./utils";
 import { AnimeList, Datum } from "./Interfaces/animeList.interface";
-import { state } from "./state";
+import state from "./state";
 
 /**
  * Fetch anime collection

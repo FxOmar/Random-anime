@@ -19,4 +19,4 @@ let state: StateInterface = {
   nextPage: "0",
 };
 
-export default state;
+export default (window as any).state = state;

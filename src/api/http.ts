@@ -2,7 +2,6 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: "https://kitsu.io/api/edge/",
-  timeout: 1000,
   responseType: "json",
 });
 
