@@ -39,6 +39,7 @@
   },
   "version": "0.0.1",
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "lit-html": "^1.4.1"
   }
 }
