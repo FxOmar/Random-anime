@@ -1,16 +1,15 @@
 import * as Kitsu from "./api/kitsu";
 import { AnimeList } from "./Interfaces/animeList.interface";
-import state from "./state";
 
 /**
  * Fetch anime collection
  */
 function fetchAnimeCollection(): void {
-  if (state.nextPage !== null) {
-    Kitsu.listAll(state.nextPage).then((response: AnimeList) => {
-      state.collection.push(...response.data);
+  if (window.state.nextPage !== null) {
+    Kitsu.listAll(window.state.nextPage).then((response: AnimeList) => {
+      window.state.collection.push(...response.data);
 
-      state.nextPage = response.links.next
+      window.state.nextPage = response.links.next
         ? response.links.next.match(/[0-9]+$/g)[0]
         : null;
     });

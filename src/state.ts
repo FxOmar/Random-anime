@@ -6,6 +6,12 @@ interface StateInterface {
   nextPage: string;
 }
 
+declare global {
+  interface Window {
+    state: StateInterface;
+  }
+}
+
 /**
  * Global state
  */
@@ -19,4 +25,4 @@ let state: StateInterface = {
   nextPage: "0",
 };
 
-export default (window as any).state = state;
+export default window.state = state;

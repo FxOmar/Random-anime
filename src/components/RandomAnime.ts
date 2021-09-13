@@ -2,7 +2,6 @@ import { html } from "lit-html";
 import { randomItemFromArray } from "./../utils";
 import { Datum } from "./../interfaces/animeList.interface";
 import fetchAnimeCollection from "../FetchAnime";
-import state from "../state";
 
 function rollRandomAnime(arr: Datum[]) {
   const randomAnime = randomItemFromArray(arr);
@@ -27,7 +26,7 @@ const randomAnime = async (ev: {
     target.classList.remove("animate");
   }, 500);
 
-  await rollRandomAnime(state.collection);
+  await rollRandomAnime(window.state.collection);
 };
 
 export default () =>
