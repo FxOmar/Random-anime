@@ -1,4 +1,5 @@
 import { Datum, AnimeListLinks } from "./Interfaces/animeList.interface";
+import SM from "./SM";
 
 interface StateInterface {
   collection: Datum[];
@@ -15,14 +16,22 @@ declare global {
 /**
  * Global state
  */
-let state: StateInterface = {
-  collection: [],
-  links: {
-    first: "",
-    next: "",
-    last: "",
-  },
-  nextPage: "0",
-};
 
-export default window.state = state;
+const store = new SM({
+  state: <StateInterface>{
+    collection: [],
+    links: {
+      first: "",
+      next: "",
+      last: "",
+    },
+    nextPage: "0",
+  },
+  mutation: {
+    SET_COLLECTION(state: any, payload: any): void {
+      state.collection = payload;
+    },
+  },
+});
+
+export default store;
