@@ -1,14 +1,14 @@
 import "./assets/css/style.css";
-import store from "./state";
 import fetchAnimeCollection from "./FetchAnime";
-import { render } from "lit-html";
+import { render, html } from "lit-html";
 import RandomAnime from "./components/RandomAnime";
+import "./Store";
 
 /**
  * Call fetchAnimeCollection on the load time.
  */
 window.onload = () => fetchAnimeCollection();
 
-store.commit("SET_COLLECTION", "sdfjkhskdjfh");
-console.log(store.getState("collection"));
-render(RandomAnime(), document.getElementById("app"));
+const APP = () => html` ${RandomAnime()}`;
+
+render(APP(), document.getElementById("app"));

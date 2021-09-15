@@ -7,9 +7,14 @@ interface StateInterface {
   nextPage: string;
 }
 
+interface MutationInterface {
+  SET_NEXT_PAGE: Function;
+  SET_COLLECTION: Function;
+}
+
 declare global {
   interface Window {
-    state: StateInterface;
+    Store: any;
   }
 }
 
@@ -17,7 +22,7 @@ declare global {
  * Global state
  */
 
-const store = new SM({
+const Store = new SM({
   state: <StateInterface>{
     collection: [],
     links: {
@@ -27,11 +32,14 @@ const store = new SM({
     },
     nextPage: "0",
   },
-  mutation: {
-    SET_COLLECTION(state: any, payload: any): void {
-      state.collection = payload;
+  mutation: <MutationInterface>{
+    SET_NEXT_PAGE(state: any, payload: String): void {
+      state.nextPage = payload;
+    },
+    SET_COLLECTION(state: any, payload: Datum[]): void {
+      state.collection.push(...payload);
     },
   },
 });
 
-export default store;
+export default window.Store = Store;

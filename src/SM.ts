@@ -1,20 +1,19 @@
-interface Options {
-  state?: Object;
-  mutation?: Object;
+interface StoreInterface {
+  // store: Object;
+  mapState: Function;
+  commit: Function;
 }
 
-export default class SM {
-  _options: Options = {};
-
-  constructor(_options: Options) {
-    this._options = _options;
+export default class SM<U, T> implements StoreInterface {
+  constructor(public store: { state: U; mutation: T }) {
+    this.store = store;
   }
 
-  getState(name: string) {
-    return this._options.state[name];
+  mapState(name: string) {
+    return this.store.state[name];
   }
 
   commit(name: string, value?: any) {
-    return this._options.mutation[name](this._options.state, value);
+    return this.store.mutation[name](this.store.state, value);
   }
 }

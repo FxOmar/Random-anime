@@ -5,13 +5,17 @@ import { AnimeList } from "./Interfaces/animeList.interface";
  * Fetch anime collection
  */
 function fetchAnimeCollection(): void {
-  if (window.state.nextPage !== null) {
-    Kitsu.listAll(window.state.nextPage).then((response: AnimeList) => {
-      window.state.collection.push(...response.data);
+  const Store = window.Store;
+  const nextPage = Store.mapState("nextPage");
 
-      window.state.nextPage = response.links.next
-        ? response.links.next.match(/[0-9]+$/g)[0]
-        : null;
+  if (nextPage !== null) {
+    Kitsu.listAll(nextPage).then((response: AnimeList) => {
+      Store.commit("SET_COLLECTION", response.data);
+
+      Store.commit(
+        "SET_NEXT_PAGE",
+        response.links.next ? response.links.next.match(/[0-9]+$/g)[0] : null
+      );
     });
   } else {
     return;
