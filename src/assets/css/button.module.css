@@ -1,42 +1,22 @@
-body {
-  font-size: 16px;
-  font-family: "Helvetica", "Arial", sans-serif;
-  text-align: center;
-  background-color: #f8faff;
-}
-
 #bubbly-button {
+  @apply appearance-none rounded cursor-pointer inline-block text-base mb-16 mt-24 py-4 px-8 relative text-white;
   font-family: "Helvetica", "Arial", sans-serif;
-  display: inline-block;
-  font-size: 1em;
-  padding: 1em 2em;
-  margin-top: 100px;
-  margin-bottom: 60px;
-  -webkit-appearance: none;
-  appearance: none;
-  background-color: #ff0081;
-  color: #fff;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-  position: relative;
+  background-color: rgba(255, 0, 129, 1);
   transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
   box-shadow: 0 2px 25px rgba(255, 0, 130, 0.5);
 }
+
 #bubbly-button:focus {
   outline: 0;
 }
 #bubbly-button:before,
 #bubbly-button:after {
-  position: absolute;
+  @apply bg-no-repeat block h-full absolute;
   content: "";
-  display: block;
   width: 140%;
-  height: 100%;
   left: -20%;
   z-index: -1000;
   transition: all ease-in-out 0.5s;
-  background-repeat: no-repeat;
 }
 #bubbly-button:before {
   display: none;

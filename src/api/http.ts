@@ -1,12 +1,7 @@
-import axios from "axios";
+import { createNewInstance } from "bhr-maker";
 
-const instance = axios.create({
-  baseURL: "https://kitsu.io/api/edge/",
-  responseType: "json",
-});
-
-instance.interceptors.response.use(null, function (error) {
-  return Promise.reject(error);
+const instance = createNewInstance({
+  PREFIX_URL: "https://kitsu.io/api/edge/",
 });
 
 export default instance;
