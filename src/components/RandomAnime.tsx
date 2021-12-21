@@ -1,7 +1,7 @@
 import buttonCss from "../assets/css/button.module.css";
-import { FC, useRef } from "react";
+import { FC, useRef, memo } from "react";
 
-export const RandomAnime: FC<{ callback: Function }> = ({ callback }) => {
+export const RandomAnime: FC<{ callback: Function }> = memo(({ callback }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   function handleButtonClick() {
@@ -22,12 +22,12 @@ export const RandomAnime: FC<{ callback: Function }> = ({ callback }) => {
     <button
       id={buttonCss["bubbly-button"]}
       ref={buttonRef}
-      onClick={(handleButtonClick(), callback())}
+      onClick={callback()}
     >
       Roll a random anime
     </button>
   );
-};
+});
 
 // const newLocal = "YOUR_RANDOM_ANIME_LIST";
 
